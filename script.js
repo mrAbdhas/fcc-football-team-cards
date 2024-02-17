@@ -177,3 +177,12 @@ const myFavoriteFootballTeam = {
 
 //Ensure immutability of object myFavoriteFootballTeam.
 Object.freeze(myFavoriteFootballTeam);
+
+/*Access myFavoriteFootballTeam object. 
+Using Destructuring assignment to unpack 
+values from arrays, or properties from objects,
+and assign them to variables.*/
+// Object destructuring  
+const {sport, team, year, players} = myFavoriteFootballTeam;
+const {coachName} = myFavoriteFootballTeam.headCoach;
+

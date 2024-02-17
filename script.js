@@ -186,3 +186,8 @@ and assign them to variables.*/
 const {sport, team, year, players} = myFavoriteFootballTeam;
 const {coachName} = myFavoriteFootballTeam.headCoach;
 
+//Display team infomation on UI 
+typeOfSport.textContent = sport;
+teamName.textContent = team;
+worldCupYear.textContent = year;
+headCoach.textContent = coachName;

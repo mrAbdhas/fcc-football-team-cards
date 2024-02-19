@@ -191,3 +191,66 @@ typeOfSport.textContent = sport;
 teamName.textContent = team;
 worldCupYear.textContent = year;
 headCoach.textContent = coachName;
+
+//Function that Generate HTML player cards based on an array of player objects, and update the content of the playerCards container.
+const setPlayerCards = (arr = players) => { // Define function setPlayerCards with an optional parameter 'arr' defaulted to the players array.
+
+  // Create new array using map() by iterating through players array and return a new array.
+  // Use the addition assignment += operator to append the new array to playerCards.innerHTML.
+  playerCards.innerHTML += arr.map(({name, position, number, isCaptain, nickname}) =>   //acces objects in arr array, unpack using Destructuring assignment, assigning them into variables.
+    //Template literals containing HTML content for the player cards
+    `
+      <div class="player-card">
+        <h2>${name}${isCaptain ? "(Captain)" : ""}</h2>
+        <p>Position: ${position}</p>
+        <p>Number: ${number}</p>
+        <p>Nickname: ${nickname !== null ? nickname : "N/A"}</p>
+      </div>
+    `
+
+  ).join("");// Chain the .join() method to the .map() method to remove commas between each player card.
+}
+
+/*Event listener detect user selection on dropdown menu.
+and update UI according to the selection*/
+playersDropdownList.addEventListener("change", (e) => {
+  /*e.target.value represents the value property from the 
+  playersDropdownList element.
+  /* console.log(e.target.value) 
+  following value properties: all, nicknames, position, midfielder
+  defender and goalkeeper*/ 
+
+  playerCards.innerHTML = ""; //Reset the content for the playerCards element
+
+  //Check user selection from the player dropdown menu, and filter out cards based on the selection.
+  switch (e.target.value) { //e.target.value represents the value property from the playersDropdownList element.
+    case "nickname":
+      // Filter players by nickname and update player cards
+      setPlayerCards(players.filter((player) => player.nickname !== null)
+      ); //Call setPlayerCards function with argument players.filter(), Add call back funtion with parameter player and implicitly return player.nickname is not null.
+      break;
+    case "position":
+      // Filter players by forward position and update player cards
+      setPlayerCards(players.filter((player) => player.position === "forward")
+      );
+      break;
+    case "midfielder":
+      // Filter players by midfielder position and update player cards
+      setPlayerCards(players.filter((player) => player.position === "midfielder")
+      );
+      break;
+    case "defender":
+       // Filter players by defender position and update player cards
+      setPlayerCards(players.filter((player) => player.position === "defender")
+      );
+      break;
+    case "goalkeeper":
+      // Filter players by goalkeeper position and update player cards
+      setPlayerCards(players.filter((player) => player.position === "goalkeeper")
+      );
+      break;
+    default: //default clause, if none of the other case clauses match user selection
+      setPlayerCards(); //for the defualt case clause call setPlayerCards() function.
+  }
+}
+); 
